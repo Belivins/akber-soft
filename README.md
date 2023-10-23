@@ -5,7 +5,8 @@
 ## Пример работы
 Сокет-сервер:
 
-<code>1> c("examples/server").
+<code> rebar3 shell
+1> c("examples/server").
 {ok,server}
 2> Sock = server:main().
 <0.197.0>
@@ -15,7 +16,8 @@ ok
 
 Subscriber:
 
-<code>1> c("examples/subscriber").
+<code>rebar3 shell
+1> c("examples/subscriber").
 {ok,subscriber}
 2> subscriber:main().
 Binding OK with Pid: <0.197.0>
