@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module chumak_command</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module chumak_command</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Module responsible to decode and encode ZeroMQ commands.
+
+
+<h2><a name="description">Description</a></h2>Module responsible to decode and encode ZeroMQ commands
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-cancel">cancel()</a></h3>
+<p><tt>cancel() = <a href="#type-cancel">cancel()</a></tt></p>
+<p>  cancel command
+  commands used in the curveZMQ handshake:</p>
+
+<h3 class="typedecl"><a name="type-command">command()</a></h3>
+<p><tt>command() = <a href="#type-ready">ready()</a> | <a href="#type-ping">ping()</a> | <a href="#type-error">error()</a> | <a href="#type-subscribe">subscribe()</a> | <a href="#type-cancel">cancel()</a> | <a href="#type-hello">hello()</a> | <a href="#type-welcome">welcome()</a> | <a href="#type-initiate">initiate()</a> | <a href="#type-ready">ready()</a> | <a href="#type-message">message()</a></tt></p>
+
+
+<h3 class="typedecl"><a name="type-decode_error">decode_error()</a></h3>
+<p><tt>decode_error() = <a href="#type-ready_decode_error">ready_decode_error()</a></tt></p>
+
+
+<h3 class="typedecl"><a name="type-error">error()</a></h3>
+<p><tt>error() = <a href="#type-error">error()</a></tt></p>
+<p>  error command</p>
+
+<h3 class="typedecl"><a name="type-hello">hello()</a></h3>
+<p><tt>hello() = #hello{}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-initiate">initiate()</a></h3>
+<p><tt>initiate() = #initiate{metadata = map(), client_public_key = binary()}</tt></p>
+<p>  CurveZMQ payload (messages) is also encoded as commands</p>
+
+<h3 class="typedecl"><a name="type-message">message()</a></h3>
+<p><tt>message() = #message{}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-ping">ping()</a></h3>
+<p><tt>ping() = <a href="#type-ping">ping()</a></tt></p>
+<p>  ping command</p>
+
+<h3 class="typedecl"><a name="type-ready">ready()</a></h3>
+<p><tt>ready() = <a href="#type-ready">ready()</a></tt></p>
+<p>  ready command</p>
+
+<h3 class="typedecl"><a name="type-ready_decode_error">ready_decode_error()</a></h3>
+<p><tt>ready_decode_error() = wrong_ready_message</tt></p>
+
+
+<h3 class="typedecl"><a name="type-subscribe">subscribe()</a></h3>
+<p><tt>subscribe() = <a href="#type-subscribe">subscribe()</a></tt></p>
+<p>  subscribe command</p>
+
+<h3 class="typedecl"><a name="type-welcome">welcome()</a></h3>
+<p><tt>welcome() = #welcome{}</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#cancel_subscription-1">cancel_subscription/1</a></td><td>return subscription of cancel command.</td></tr>
+<tr><td valign="top"><a href="#command_name-1">command_name/1</a></td><td>returns the name of a command.</td></tr>
+<tr><td valign="top"><a href="#decode-2">decode/2</a></td><td>decode reads incoming command and generate an command 'object'.</td></tr>
+<tr><td valign="top"><a href="#encode_cancel-1">encode_cancel/1</a></td><td>encode a cancel command.</td></tr>
+<tr><td valign="top"><a href="#encode_error-1">encode_error/1</a></td><td>returns an encoded error command.</td></tr>
+<tr><td valign="top"><a href="#encode_ready-4">encode_ready/4</a></td><td>encode a ready command.</td></tr>
+<tr><td valign="top"><a href="#encode_ready_properties-1">encode_ready_properties/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#encode_subscribe-1">encode_subscribe/1</a></td><td>encode a subscribe command.</td></tr>
+<tr><td valign="top"><a href="#error_reason-1">error_reason/1</a></td><td>returns the reason of error.</td></tr>
+<tr><td valign="top"><a href="#initiate_client_key-1">initiate_client_key/1</a></td><td>return the public key of the client.</td></tr>
+<tr><td valign="top"><a href="#initiate_metadata-1">initiate_metadata/1</a></td><td>return the metadata of an initiate command.</td></tr>
+<tr><td valign="top"><a href="#ready_identity-1">ready_identity/1</a></td><td>return the identity of a ready command.</td></tr>
+<tr><td valign="top"><a href="#ready_metadata-1">ready_metadata/1</a></td><td>return the metadata of a ready command.</td></tr>
+<tr><td valign="top"><a href="#ready_resource-1">ready_resource/1</a></td><td>return the resource of a ready command.</td></tr>
+<tr><td valign="top"><a href="#ready_socket_type-1">ready_socket_type/1</a></td><td>return the socket type of a ready command.</td></tr>
+<tr><td valign="top"><a href="#subscribe_subscription-1">subscribe_subscription/1</a></td><td>return subscription of subscribe command.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="cancel_subscription-1">cancel_subscription/1</a></h3>
+<div class="spec">
+<p><tt>cancel_subscription(Command::<a href="#type-cancel">cancel()</a>) -&gt; Subscription::binary()</tt><br></p>
+</div><p>return subscription of cancel command</p>
+
+<h3 class="function"><a name="command_name-1">command_name/1</a></h3>
+<div class="spec">
+<p><tt>command_name(Command::<a href="#type-command">command()</a>) -&gt; Name::atom()</tt><br></p>
+</div><p>returns the name of a command</p>
+
+<h3 class="function"><a name="decode-2">decode/2</a></h3>
+<div class="spec">
+<p><tt>decode(Frame::<a href="chumak_protocol.html#type-frame">chumak_protocol:frame()</a>, CurveData::<a href="chumak_curve.html#type-curve_data">chumak_curve:curve_data()</a>) -&gt; {ok, Command::<a href="#type-command">command()</a>, NewCurveData::<a href="chumak_curve.html#type-curve_data">chumak_curve:curve_data()</a>} | {error, <a href="#type-decode_error">decode_error()</a>}</tt><br></p>
+</div><p>decode reads incoming command and generate an command 'object'</p>
+
+<h3 class="function"><a name="encode_cancel-1">encode_cancel/1</a></h3>
+<div class="spec">
+<p><tt>encode_cancel(Subscription::binary()) -&gt; Command::binary()</tt><br></p>
+</div><p>encode a cancel command</p>
+
+<h3 class="function"><a name="encode_error-1">encode_error/1</a></h3>
+<div class="spec">
+<p><tt>encode_error(Reason::string()) -&gt; Data::binary()</tt><br></p>
+</div><p>returns an encoded error command</p>
+
+<h3 class="function"><a name="encode_ready-4">encode_ready/4</a></h3>
+<div class="spec">
+<p><tt>encode_ready(SocketType::atom(), Identity::string(), Resource::string(), Metadata::map()) -&gt; Data::binary()</tt><br></p>
+</div><p>encode a ready command</p>
+
+<h3 class="function"><a name="encode_ready_properties-1">encode_ready_properties/1</a></h3>
+<div class="spec">
+<p><tt>encode_ready_properties(Properties) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="encode_subscribe-1">encode_subscribe/1</a></h3>
+<div class="spec">
+<p><tt>encode_subscribe(Subscription::binary()) -&gt; Command::binary()</tt><br></p>
+</div><p>encode a subscribe command</p>
+
+<h3 class="function"><a name="error_reason-1">error_reason/1</a></h3>
+<div class="spec">
+<p><tt>error_reason(Command::<a href="#type-error">error()</a>) -&gt; Reason::string()</tt><br></p>
+</div><p>returns the reason of error</p>
+
+<h3 class="function"><a name="initiate_client_key-1">initiate_client_key/1</a></h3>
+<div class="spec">
+<p><tt>initiate_client_key(Command::<a href="#type-initiate">initiate()</a>) -&gt; Key::binary()</tt><br></p>
+</div><p>return the public key of the client. This is an element of the
+  INITIATE command. It can be used to identify the client.</p>
+
+<h3 class="function"><a name="initiate_metadata-1">initiate_metadata/1</a></h3>
+<div class="spec">
+<p><tt>initiate_metadata(Command::<a href="#type-initiate">initiate()</a>) -&gt; Metadata::map()</tt><br></p>
+</div><p>return the metadata of an initiate command</p>
+
+<h3 class="function"><a name="ready_identity-1">ready_identity/1</a></h3>
+<div class="spec">
+<p><tt>ready_identity(Command::<a href="#type-ready">ready()</a>) -&gt; Identity::string()</tt><br></p>
+</div><p>return the identity of a ready command</p>
+
+<h3 class="function"><a name="ready_metadata-1">ready_metadata/1</a></h3>
+<div class="spec">
+<p><tt>ready_metadata(Command::<a href="#type-ready">ready()</a>) -&gt; Metadata::map()</tt><br></p>
+</div><p>return the metadata of a ready command</p>
+
+<h3 class="function"><a name="ready_resource-1">ready_resource/1</a></h3>
+<div class="spec">
+<p><tt>ready_resource(Command::<a href="#type-ready">ready()</a>) -&gt; Resource::string()</tt><br></p>
+</div><p>return the resource of a ready command</p>
+
+<h3 class="function"><a name="ready_socket_type-1">ready_socket_type/1</a></h3>
+<div class="spec">
+<p><tt>ready_socket_type(Command::<a href="#type-ready">ready()</a>) -&gt; SocketType::atom()</tt><br></p>
+</div><p>return the socket type of a ready command</p>
+
+<h3 class="function"><a name="subscribe_subscription-1">subscribe_subscription/1</a></h3>
+<div class="spec">
+<p><tt>subscribe_subscription(Command::<a href="#type-subscribe">subscribe()</a>) -&gt; Subscription::binary()</tt><br></p>
+</div><p>return subscription of subscribe command</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>

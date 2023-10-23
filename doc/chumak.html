@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module chumak</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module chumak</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Erlang bindings for ZeroMQ.
+
+<p><b>Behaviours:</b> <a href="application.html"><tt>application</tt></a>.</p>
+
+<h2><a name="description">Description</a></h2><p>Erlang bindings for ZeroMQ.</p>
+ 
+  see ZeroMQ 3.1 RFC in http://rfc.zeromq.org/spec:37
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-version">version()</a></h3>
+<p><tt>version() = {Major::integer(), Minor::integer(), Patch::integer()}</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#attach_resource-3">attach_resource/3</a></td><td>attach a new socket as a resource into resource server.</td></tr>
+<tr><td valign="top"><a href="#bind-4">bind/4</a></td><td>bind in a host and port.</td></tr>
+<tr><td valign="top"><a href="#cancel-2">cancel/2</a></td><td>cancel a subscription for a topic, only supported in SUB and XSUB patterns.</td></tr>
+<tr><td valign="top"><a href="#connect-4">connect/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#connect-5">connect/5</a></td><td>socket to a peer.</td></tr>
+<tr><td valign="top"><a href="#detach_resource-2">detach_resource/2</a></td><td>detach socket resource from resource server.</td></tr>
+<tr><td valign="top"><a href="#recv-1">recv/1</a></td><td>recv a message for peers.</td></tr>
+<tr><td valign="top"><a href="#recv_multipart-1">recv_multipart/1</a></td><td>recv a message for peers by a list of binaries.</td></tr>
+<tr><td valign="top"><a href="#resource-0">resource/0</a></td><td>start a new resource server.</td></tr>
+<tr><td valign="top"><a href="#send-2">send/2</a></td><td>send a message for peers.</td></tr>
+<tr><td valign="top"><a href="#send_multipart-2">send_multipart/2</a></td><td>send a message for peers using a list of binaries.</td></tr>
+<tr><td valign="top"><a href="#set_socket_option-3">set_socket_option/3</a></td><td>set socket option.</td></tr>
+<tr><td valign="top"><a href="#socket-1">socket/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#socket-2">socket/2</a></td><td>start a new socket.</td></tr>
+<tr><td valign="top"><a href="#subscribe-2">subscribe/2</a></td><td>subscribe a topic, only supported in SUB and XSUB patterns.</td></tr>
+<tr><td valign="top"><a href="#unblock-1">unblock/1</a></td><td>unblock a socket that is waiting on a message,
+  return {error, again}.</td></tr>
+<tr><td valign="top"><a href="#version-0">version/0</a></td><td></td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="attach_resource-3">attach_resource/3</a></h3>
+<div class="spec">
+<p><tt>attach_resource(ResourcePid::pid(), Resource::binary(), SocketPid::pid()) -&gt; ok</tt><br></p>
+</div><p>attach a new socket as a resource into resource server.</p>
+
+<h3 class="function"><a name="bind-4">bind/4</a></h3>
+<div class="spec">
+<p><tt>bind(SocketPid::pid(), Transport::<a href="#type-transport">transport()</a>, Host::string(), Port::integer()) -&gt; {ok, pid()} | {error, term()}</tt><br></p>
+</div><p>bind in a host and port</p>
+
+<h3 class="function"><a name="cancel-2">cancel/2</a></h3>
+<div class="spec">
+<p><tt>cancel(SocketPid::pid(), Topic::binary()) -&gt; ok</tt><br></p>
+</div><p>cancel a subscription for a topic, only supported in SUB and XSUB patterns.</p>
+
+<h3 class="function"><a name="connect-4">connect/4</a></h3>
+<div class="spec">
+<p><tt>connect(SocketPid, Transport, Host, Port) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="connect-5">connect/5</a></h3>
+<div class="spec">
+<p><tt>connect(SocketPid::pid(), Transport::<a href="#type-transport">transport()</a>, Host::string(), Port::integer(), Resource::term()) -&gt; {ok, PeerPid::pid()} | {error, Reason::atom()}</tt><br></p>
+</div><p>socket to a peer</p>
+
+<h3 class="function"><a name="detach_resource-2">detach_resource/2</a></h3>
+<div class="spec">
+<p><tt>detach_resource(ResourcePid::pid(), Resource::binary()) -&gt; ok</tt><br></p>
+</div><p>detach socket resource from resource server.</p>
+
+<h3 class="function"><a name="recv-1">recv/1</a></h3>
+<div class="spec">
+<p><tt>recv(SocketPid::pid()) -&gt; {ok, Data::binary()} | {error, Reason::atom()}</tt><br></p>
+</div><p>recv a message for peers</p>
+
+<h3 class="function"><a name="recv_multipart-1">recv_multipart/1</a></h3>
+<div class="spec">
+<p><tt>recv_multipart(SocketPid::pid()) -&gt; {ok, [Data::binary()]} | {error, Reason::atom()}</tt><br></p>
+</div><p>recv a message for peers by a list of binaries</p>
+
+<h3 class="function"><a name="resource-0">resource/0</a></h3>
+<div class="spec">
+<p><tt>resource() -&gt; {ok, ResourcePid::pid()} | {error, Reason::atom()}</tt><br></p>
+</div><p>start a new resource server.</p>
+
+<h3 class="function"><a name="send-2">send/2</a></h3>
+<div class="spec">
+<p><tt>send(SocketPid::pid(), Data::binary()) -&gt; ok</tt><br></p>
+</div><p>send a message for peers</p>
+
+<h3 class="function"><a name="send_multipart-2">send_multipart/2</a></h3>
+<div class="spec">
+<p><tt>send_multipart(SocketPid::pid(), Multipart::[Data::binary()]) -&gt; ok</tt><br></p>
+</div><p>send a message for peers using a list of binaries</p>
+
+<h3 class="function"><a name="set_socket_option-3">set_socket_option/3</a></h3>
+<div class="spec">
+<p><tt>set_socket_option(SocketPid::pid(), Option::<a href="#type-socket_option">socket_option()</a>, Value::term()) -&gt; ok | {error, Reason::atom()}</tt><br></p>
+</div><p><p>set socket option.  
+In case of a problem an error is returned and the socket remains unchanged.</p>
+ 
+  Valid options are:
+  <dl>
+    <dt>curve_server</dt>
+    <dd>- Set CURVE server role</dd>
+    <dd>- type: boolean()</dd>
+    <dd>Defines whether the socket will act as server for CURVE security. A
+    value of true means the socket will act as CURVE server. A value of false
+    means the socket will not act as CURVE server. When you set this you must
+    also set the server's secret key using the curve_secretkey option. A server
+    socket does not need to know its own public key.</dd>
+ 
+    <dt>curve_serverkey</dt>
+    <dd>- Set CURVE server key</dd>
+    <dd>- type: binary() or string()</dd>
+    <dd>Sets the socket's long term server key. You must set this on CURVE
+    client sockets. You can provide the key as 32 binary bytes, or as a
+    40-character string encoded in the Z85 encoding format. This key must have
+    been generated together with the server's secret key.</dd>
+ 
+    <dt>curve_secretkey</dt>
+    <dd>- Set CURVE secret key</dd>
+    <dd>- type: binary() or string()</dd>
+    <dd>Sets the socket's long term secret key. You must set this on both
+    CURVE client and server sockets. You can provide the key as 32 binary
+    bytes, or as a 40-character string encoded in the Z85 encoding format.</dd>
+ 
+    <dt>curve_publickey</dt>
+    <dd>- Set CURVE public key</dd>
+    <dd>- type: binary() or string()</dd>
+    <dd>Sets the socket's long term public key. You must set this on CURVE
+    client sockets. You can provide the key as 32 binary bytes, or as a
+    40-character string encoded in the Z85 encoding format. The public key
+    must always be used with the matching secret key.</dd>
+ 
+    <dt>curve_clientkeys</dt>
+    <dd>- Provide public keys of authorised clients</dd>
+    <dd>- type: list of string() or integer() , or 'any'</dd>
+    <dd>Determines which clients are authorised to connect to the server. You
+    may set this on CURVE server sockets. If it is not set explicitly, if
+    defaults to 'any', which means that all clients have access (provided that
+    they know the CURVE secret key). If a list of keys is provided, only
+    clients with those public keys can connect to the server. You can provide
+    the keys as 32-byte binaries or as 40-character strings.</dd>
+  </dl></p>
+
+<h3 class="function"><a name="socket-1">socket/1</a></h3>
+<div class="spec">
+<p><tt>socket(Type) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="socket-2">socket/2</a></h3>
+<div class="spec">
+<p><tt>socket(Type::<a href="#type-socket_type">socket_type()</a>, Identity::string()) -&gt; {ok, SocketPid::pid()} | {error, Reason::atom()}</tt><br></p>
+</div><p>start a new socket</p>
+
+<h3 class="function"><a name="subscribe-2">subscribe/2</a></h3>
+<div class="spec">
+<p><tt>subscribe(SocketPid::pid(), Topic::binary()) -&gt; ok</tt><br></p>
+</div><p>subscribe a topic, only supported in SUB and XSUB patterns.</p>
+
+<h3 class="function"><a name="unblock-1">unblock/1</a></h3>
+<div class="spec">
+<p><tt>unblock(SocketPid::pid()) -&gt; ok</tt><br></p>
+</div><p>unblock a socket that is waiting on a message,
+  return {error, again}</p>
+
+<h3 class="function"><a name="version-0">version/0</a></h3>
+<div class="spec">
+<p><tt>version() -&gt; {ok, Version::<a href="#type-version">version()</a>} | {error, Reason::atom()}</tt><br></p>
+</div>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>

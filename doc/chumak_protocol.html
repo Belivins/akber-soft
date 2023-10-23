@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module chumak_protocol</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module chumak_protocol</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Parser of ZeroMQ protocol.
+
+
+<h2><a name="description">Description</a></h2><p>Parser of ZeroMQ protocol</p>
+ 
+  This module was created to make responsibility of decode and make a buffer of ZeroMQ wire protocol,
+  the client of this module needs to announce that more bytes were been received by peer.
+ 
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-bad_greeting_frame">bad_greeting_frame()</a></h3>
+<p><tt>bad_greeting_frame() = {bad_greeting_frame, Frame::binary()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-decode_reason">decode_reason()</a></h3>
+<p><tt>decode_reason() = <a href="#type-bad_greeting_frame">bad_greeting_frame()</a> | <a href="#type-invalid_version">invalid_version()</a> | <a href="#type-invalid_mechanism">invalid_mechanism()</a></tt></p>
+<p>  decode fail reason</p>
+
+<h3 class="typedecl"><a name="type-decoder">decoder()</a></h3>
+<p><tt>decoder() = #decoder{state = <a href="#type-decoder_state">decoder_state()</a>, size = integer(), buffer = nil | binary(), next_state = nil | <a href="#type-decoder_state">decoder_state()</a>, version_major = nil | {some, integer()}, version_minor = nil | {some, integer()}, security_data = <a href="#type-decoder_security_data">decoder_security_data()</a>, mechanism = nil | <a href="#type-security_mechanism">security_mechanism()</a>, as_server = boolean()}</tt></p>
+<p>  the structure responsible to decode incoming bytes</p>
+
+<h3 class="typedecl"><a name="type-decoder_cmds">decoder_cmds()</a></h3>
+<p><tt>decoder_cmds() = {ok, UpdatedDecoder::<a href="#type-decoder">decoder()</a>, [Command::term()]}</tt></p>
+<p>  returned when decoder was found one or more commands.</p>
+
+<h3 class="typedecl"><a name="type-decoder_error">decoder_error()</a></h3>
+<p><tt>decoder_error() = {error, Reason::<a href="#type-decode_reason">decode_reason()</a>}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-decoder_ok">decoder_ok()</a></h3>
+<p><tt>decoder_ok() = {ok, UpdatedDecoder::<a href="#type-decoder">decoder()</a>}</tt></p>
+<p>  returned when decoder only decoded the frame.</p>
+
+<h3 class="typedecl"><a name="type-decoder_ready">decoder_ready()</a></h3>
+<p><tt>decoder_ready() = {ready, UpdatedDecoder::<a href="#type-decoder">decoder()</a>}</tt></p>
+<p>  returned when decoder was finished greeting part.</p>
+
+<h3 class="typedecl"><a name="type-decoder_reply">decoder_reply()</a></h3>
+<p><tt>decoder_reply() = <a href="#type-decoder_ready">decoder_ready()</a> | <a href="#type-decoder_ok">decoder_ok()</a> | <a href="#type-decoder_cmds">decoder_cmds()</a> | <a href="#type-decoder_error">decoder_error()</a></tt></p>
+<p>  reply of decoder command</p>
+
+<h3 class="typedecl"><a name="type-decoder_security_data">decoder_security_data()</a></h3>
+<p><tt>decoder_security_data() = #{} | <a href="chumak_curve.html#type-curve_data">chumak_curve:curve_data()</a></tt></p>
+
+
+<h3 class="typedecl"><a name="type-decoder_state">decoder_state()</a></h3>
+<p><tt>decoder_state() = initial | waiting_minor_version | waiting_mechanism | waiting_as_server | waiting_filler | ready | command_ready | message_ready | require_size</tt></p>
+<p>  the state of decoder</p>
+
+<h3 class="typedecl"><a name="type-decoder_version">decoder_version()</a></h3>
+<p><tt>decoder_version() = {MajorVersion::integer(), MinorVersion::integer()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-frame">frame()</a></h3>
+<p><tt>frame() = binary()</tt></p>
+<p>  the bytes received or sent</p>
+
+<h3 class="typedecl"><a name="type-invalid_mechanism">invalid_mechanism()</a></h3>
+<p><tt>invalid_mechanism() = {mechanism_not_supported_yet, Mechanism::atom()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-invalid_version">invalid_version()</a></h3>
+<p><tt>invalid_version() = {invalid_version, Major::atom()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-message">message()</a></h3>
+<p><tt>message() = #message{frame = binary(), has_more = true | false}</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#build_greeting_frame-2">build_greeting_frame/2</a></td><td>build_greeting_frame creates a new greeting frame done to send to peer.</td></tr>
+<tr><td valign="top"><a href="#build_hello_frame-1">build_hello_frame/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#build_initiate_frame-2">build_initiate_frame/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#build_ready_frame-2">build_ready_frame/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#build_welcome_frame-1">build_welcome_frame/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#continue_decode-1">continue_decode/1</a></td><td>continue decoding after the decoder announce decoder has finished the greetings part.</td></tr>
+<tr><td valign="top"><a href="#decode-2">decode/2</a></td><td>decode reads incoming frame and generate an updated decoder.</td></tr>
+<tr><td valign="top"><a href="#decoder_as_server-1">decoder_as_server/1</a></td><td>decoder_as_server returns the as_server setting from the greeting.</td></tr>
+<tr><td valign="top"><a href="#decoder_buffer-1">decoder_buffer/1</a></td><td>Return the current buffer of a decoder.</td></tr>
+<tr><td valign="top"><a href="#decoder_mechanism-1">decoder_mechanism/1</a></td><td>decoder_mechanism returns the current security mechanism.</td></tr>
+<tr><td valign="top"><a href="#decoder_security_data-1">decoder_security_data/1</a></td><td>Return the security data of a decoder.</td></tr>
+<tr><td valign="top"><a href="#decoder_state-1">decoder_state/1</a></td><td>decoder_state returns the current status of decoder.</td></tr>
+<tr><td valign="top"><a href="#decoder_version-1">decoder_version/1</a></td><td>decoder_version returns the current version of decoder.</td></tr>
+<tr><td valign="top"><a href="#encode_command-1">encode_command/1</a></td><td>Generate a traffic based com a command.</td></tr>
+<tr><td valign="top"><a href="#encode_last_message-3">encode_last_message/3</a></td><td>Generate a traffic based on a message.</td></tr>
+<tr><td valign="top"><a href="#encode_message_multipart-3">encode_message_multipart/3</a></td><td>Generate a traffic based com a message with multi parts.</td></tr>
+<tr><td valign="top"><a href="#encode_more_message-3">encode_more_message/3</a></td><td>Generate a traffic based on a message.</td></tr>
+<tr><td valign="top"><a href="#encode_old_cancel-1">encode_old_cancel/1</a></td><td>encode a old format of unsubscriptions found in version 3.0 of zeromq.</td></tr>
+<tr><td valign="top"><a href="#encode_old_subscribe-1">encode_old_subscribe/1</a></td><td>encode a old format of subscriptions found in version 3.0 of zeromq.</td></tr>
+<tr><td valign="top"><a href="#message_data-1">message_data/1</a></td><td>Return data for a message.</td></tr>
+<tr><td valign="top"><a href="#message_has_more-1">message_has_more/1</a></td><td>Return if message has the flag marked to receive more messages.</td></tr>
+<tr><td valign="top"><a href="#new_decoder-1">new_decoder/1</a></td><td>new_decoder creates a new decoder waiting for greeting message.</td></tr>
+<tr><td valign="top"><a href="#set_decoder_security_data-2">set_decoder_security_data/2</a></td><td>Set the security data of a decoder.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="build_greeting_frame-2">build_greeting_frame/2</a></h3>
+<div class="spec">
+<p><tt>build_greeting_frame(AsServer::boolean(), Mechanism::<a href="chumak.html#type-security_mechanism">chumak:security_mechanism()</a>) -&gt; Frame::<a href="#type-frame">frame()</a></tt><br></p>
+</div><p>build_greeting_frame creates a new greeting frame done to send to peer.</p>
+
+<h3 class="function"><a name="build_hello_frame-1">build_hello_frame/1</a></h3>
+<div class="spec">
+<p><tt>build_hello_frame(SecurityData) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="build_initiate_frame-2">build_initiate_frame/2</a></h3>
+<div class="spec">
+<p><tt>build_initiate_frame(MetaData, CurveData) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="build_ready_frame-2">build_ready_frame/2</a></h3>
+<div class="spec">
+<p><tt>build_ready_frame(MetaData, CurveData) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="build_welcome_frame-1">build_welcome_frame/1</a></h3>
+<div class="spec">
+<p><tt>build_welcome_frame(CurveData) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="continue_decode-1">continue_decode/1</a></h3>
+<div class="spec">
+<p><tt>continue_decode(Decoder::<a href="#type-decoder">decoder()</a>) -&gt; <a href="#type-decoder_reply">decoder_reply()</a></tt><br></p>
+</div><p>continue decoding after the decoder announce decoder has finished the greetings part</p>
+
+<h3 class="function"><a name="decode-2">decode/2</a></h3>
+<div class="spec">
+<p><tt>decode(Decoder::<a href="#type-decoder">decoder()</a>, Frame::<a href="#type-frame">frame()</a>) -&gt; <a href="#type-decoder_reply">decoder_reply()</a></tt><br></p>
+</div><p>decode reads incoming frame and generate an updated decoder</p>
+
+<h3 class="function"><a name="decoder_as_server-1">decoder_as_server/1</a></h3>
+<div class="spec">
+<p><tt>decoder_as_server(Decoder::<a href="#type-decoder">decoder()</a>) -&gt; boolean()</tt><br></p>
+</div><p>decoder_as_server returns the as_server setting from the greeting</p>
+
+<h3 class="function"><a name="decoder_buffer-1">decoder_buffer/1</a></h3>
+<div class="spec">
+<p><tt>decoder_buffer(Decoder::<a href="#type-decoder">decoder()</a>) -&gt; binary() | nil</tt><br></p>
+</div><p>Return the current buffer of a decoder</p>
+
+<h3 class="function"><a name="decoder_mechanism-1">decoder_mechanism/1</a></h3>
+<div class="spec">
+<p><tt>decoder_mechanism(Decoder::<a href="#type-decoder">decoder()</a>) -&gt; <a href="#type-security_mechanism">security_mechanism()</a></tt><br></p>
+</div><p>decoder_mechanism returns the current security mechanism</p>
+
+<h3 class="function"><a name="decoder_security_data-1">decoder_security_data/1</a></h3>
+<div class="spec">
+<p><tt>decoder_security_data(Decoder::<a href="#type-decoder">decoder()</a>) -&gt; nil | <a href="chumak_curve.html#type-curve_data">chumak_curve:curve_data()</a></tt><br></p>
+</div><p>Return the security data of a decoder</p>
+
+<h3 class="function"><a name="decoder_state-1">decoder_state/1</a></h3>
+<div class="spec">
+<p><tt>decoder_state(Decoder::<a href="#type-decoder">decoder()</a>) -&gt; State::<a href="#type-decoder_state">decoder_state()</a></tt><br></p>
+</div><p>decoder_state returns the current status of decoder</p>
+
+<h3 class="function"><a name="decoder_version-1">decoder_version/1</a></h3>
+<div class="spec">
+<p><tt>decoder_version(Decoder::<a href="#type-decoder">decoder()</a>) -&gt; State::<a href="#type-decoder_version">decoder_version()</a></tt><br></p>
+</div><p>decoder_version returns the current version of decoder</p>
+
+<h3 class="function"><a name="encode_command-1">encode_command/1</a></h3>
+<div class="spec">
+<p><tt>encode_command(Command::binary()) -&gt; Traffic::binary()</tt><br></p>
+</div><p>Generate a traffic based com a command</p>
+
+<h3 class="function"><a name="encode_last_message-3">encode_last_message/3</a></h3>
+<div class="spec">
+<p><tt>encode_last_message(Message::binary(), Mechanism::<a href="#type-security_mechanism">security_mechanism()</a>, SecurityData::map()) -&gt; {Traffic::binary(), map()}</tt><br></p>
+</div><p>Generate a traffic based on a message</p>
+
+<h3 class="function"><a name="encode_message_multipart-3">encode_message_multipart/3</a></h3>
+<div class="spec">
+<p><tt>encode_message_multipart(Multipart::[Message::binary()], Mechanism::<a href="#type-security_mechanism">security_mechanism()</a>, SecurityData::map()) -&gt; {Traffic::binary(), NewSecurityData::map()}</tt><br></p>
+</div><p>Generate a traffic based com a message with multi parts</p>
+
+<h3 class="function"><a name="encode_more_message-3">encode_more_message/3</a></h3>
+<div class="spec">
+<p><tt>encode_more_message(Message::binary(), Mechanism::<a href="#type-security_mechanism">security_mechanism()</a>, SecurityData::map()) -&gt; {Traffic::binary(), map()}</tt><br></p>
+</div><p>Generate a traffic based on a message</p>
+
+<h3 class="function"><a name="encode_old_cancel-1">encode_old_cancel/1</a></h3>
+<div class="spec">
+<p><tt>encode_old_cancel(Topic::binary()) -&gt; Traffic::binary()</tt><br></p>
+</div><p>encode a old format of unsubscriptions found in version 3.0 of zeromq</p>
+
+<h3 class="function"><a name="encode_old_subscribe-1">encode_old_subscribe/1</a></h3>
+<div class="spec">
+<p><tt>encode_old_subscribe(Topic::binary()) -&gt; Traffic::binary()</tt><br></p>
+</div><p>encode a old format of subscriptions found in version 3.0 of zeromq</p>
+
+<h3 class="function"><a name="message_data-1">message_data/1</a></h3>
+<div class="spec">
+<p><tt>message_data(Message::<a href="#type-message">message()</a>) -&gt; Frame::binary()</tt><br></p>
+</div><p>Return data for a message</p>
+
+<h3 class="function"><a name="message_has_more-1">message_has_more/1</a></h3>
+<div class="spec">
+<p><tt>message_has_more(Message::<a href="#type-message">message()</a>) -&gt; true | false</tt><br></p>
+</div><p>Return if message has the flag marked to receive more messages</p>
+
+<h3 class="function"><a name="new_decoder-1">new_decoder/1</a></h3>
+<div class="spec">
+<p><tt>new_decoder(SecurityData::<a href="#type-decoder_security_data">decoder_security_data()</a>) -&gt; NewDecoder::<a href="#type-decoder">decoder()</a></tt><br></p>
+</div><p>new_decoder creates a new decoder waiting for greeting message</p>
+
+<h3 class="function"><a name="set_decoder_security_data-2">set_decoder_security_data/2</a></h3>
+<div class="spec">
+<p><tt>set_decoder_security_data(Decoder::<a href="#type-decoder">decoder()</a>, SecurityData::<a href="#type-decoder_security_data">decoder_security_data()</a>) -&gt; <a href="#type-decoder">decoder()</a></tt><br></p>
+</div><p>Set the security data of a decoder</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>

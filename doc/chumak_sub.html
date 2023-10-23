@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module chumak_sub</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module chumak_sub</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>ZeroMQ Sub Pattern for Erlang.
+
+<p><b>Behaviours:</b> <a href="chumak_pattern.html"><tt>chumak_pattern</tt></a>.</p>
+
+<h2><a name="description">Description</a></h2><p>ZeroMQ Sub Pattern for Erlang</p>
+ 
+  This pattern implement Sub especification
+  from: http://rfc.zeromq.org/spec:29/PUBSUB#toc5
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#accept_peer-2">accept_peer/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#cancel-2">cancel/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#identity-1">identity/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#init-1">init/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#init-2">init/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#peer_disconected-2">peer_disconected/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#peer_flags-1">peer_flags/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#peer_ready-3">peer_ready/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#peer_reconnected-2">peer_reconnected/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#peer_recv_message-3">peer_recv_message/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#queue_ready-3">queue_ready/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#recv-2">recv/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#recv_multipart-2">recv_multipart/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#send-3">send/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#send_multipart-3">send_multipart/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#subscribe-2">subscribe/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#terminate-2">terminate/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#unblock-2">unblock/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#valid_peer_type-1">valid_peer_type/1</a></td><td></td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="accept_peer-2">accept_peer/2</a></h3>
+<div class="spec">
+<p><tt>accept_peer(Chumak_sub, PeerPid) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="cancel-2">cancel/2</a></h3>
+<div class="spec">
+<p><tt>cancel(Chumak_sub, Topic) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="identity-1">identity/1</a></h3>
+<div class="spec">
+<p><tt>identity(Chumak_sub) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="init-1">init/1</a></h3>
+<div class="spec">
+<p><tt>init(Identity) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="init-2">init/2</a></h3>
+<div class="spec">
+<p><tt>init(Identity, Opts) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="peer_disconected-2">peer_disconected/2</a></h3>
+<div class="spec">
+<p><tt>peer_disconected(Chumak_sub, PeerPid) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="peer_flags-1">peer_flags/1</a></h3>
+<div class="spec">
+<p><tt>peer_flags(Chumak_sub) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="peer_ready-3">peer_ready/3</a></h3>
+<div class="spec">
+<p><tt>peer_ready(Chumak_sub, PeerPid, Identity) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="peer_reconnected-2">peer_reconnected/2</a></h3>
+<div class="spec">
+<p><tt>peer_reconnected(Chumak_sub, PeerPid) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="peer_recv_message-3">peer_recv_message/3</a></h3>
+<div class="spec">
+<p><tt>peer_recv_message(State, Message, From) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="queue_ready-3">queue_ready/3</a></h3>
+<div class="spec">
+<p><tt>queue_ready(State, Identity, PeerPid) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="recv-2">recv/2</a></h3>
+<div class="spec">
+<p><tt>recv(Chumak_sub, From) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="recv_multipart-2">recv_multipart/2</a></h3>
+<div class="spec">
+<p><tt>recv_multipart(Chumak_sub, From) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="send-3">send/3</a></h3>
+<div class="spec">
+<p><tt>send(State, Data, From) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="send_multipart-3">send_multipart/3</a></h3>
+<div class="spec">
+<p><tt>send_multipart(Chumak_sub, Multipart, From) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="subscribe-2">subscribe/2</a></h3>
+<div class="spec">
+<p><tt>subscribe(Chumak_sub, Topic) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="terminate-2">terminate/2</a></h3>
+<div class="spec">
+<p><tt>terminate(Reason, Chumak_sub) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="unblock-2">unblock/2</a></h3>
+<div class="spec">
+<p><tt>unblock(Chumak_sub, From) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="valid_peer_type-1">valid_peer_type/1</a></h3>
+<div class="spec">
+<p><tt>valid_peer_type(X1) -&gt; any()</tt></p>
+</div>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>
