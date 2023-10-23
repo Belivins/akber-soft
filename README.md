@@ -5,22 +5,19 @@
 ## Пример работы
 Сокет-сервер:
 
-<code>1> c(server).\
-{ok,server}\
-2> server:start({127,0,0,1},8090).\
-<0.92.0>\
-Hello server\
-ok3></code>
+<code>1> c("examples/server").
+{ok,server}
+2> Sock = server:main().
+<0.197.0>
+3> server:send(Sock, "Hello client").
+ok
+4></code>
 
-Сокет-клиент:
+Subscriber:
 
-<code>1> c(client).\
-{ok,client}\
-2> Socket = client:start({127,0,0,1},8090).\
-#Port<0.2>\
-3> client:send(Socket, "Hello server").\
-ok\
-4> flush().\
-Shell got {tcp,#Port<0.2>,<<"I get it - Hello server">>}\
-ok\
-5></code>
+<code>1> c("examples/subscriber").
+{ok,subscriber}
+2> subscriber:main().
+Binding OK with Pid: <0.197.0>
+Received <<"Hello client">>
+</code>
